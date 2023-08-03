@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+        <localRepository>/var/lib/jenkins/.m2/raptor2</localRepository>
+
+        <servers>
+                <server>
+                        <id>raptor.releases</id>
+                        <username>${env.USERNAME}</username>
+                        <password>${env.PASSWORD}</password>
+                </server>
+                <server>
+                        <id>raptor.snapshots</id>
+                        <username>${env.USERNAME}</username>
+                        <password>${env.PASSWORD}</password>
+                </server>
+        </servers>
+
+        <mirrors>
+                <mirror>
+                        <id>central</id>
+                         <mirrorOf>*,!public</mirrorOf>
+			 <url>${repo}/central</url>
+                </mirror>
+        </mirrors>
+
+        <profiles>
+                <profile>
+                        <id>paypal</id>
+                        <!-- add a repository property to ease the archetype:generate useage -->
+                        <properties>
+				<archetypeCatalog>${repo}/public/archetype-catalog.xml
+                                </archetypeCatalog>
+                        </properties>
+                        <repositories>
+                                <!-- Raptor Repository -->
+                                <repository>
+                                        <id>public</id>
+					<url>${repo}/public/</url>
+                                        <releases>
+                                                <enabled>true</enabled>
+                                        </releases>
+                                        <snapshots>
+                                                <enabled>true</enabled>
+                                        </snapshots>
+                                </repository>
+                        </repositories>
+                        <pluginRepositories>
+                                <pluginRepository>
+                                        <id>public</id>
+					<url>${repo}/public/</url>
+                                        <releases>
+                                                <enabled>true</enabled>
+                                        </releases>
+                                        <snapshots>
+                                                <enabled>true</enabled>
+                                        </snapshots>
+                                </pluginRepository>
+                                <pluginRepository>
+                                        <id>central</id>
+					<url>${repo}/central</url>
+                                        <releases>
+                                                <enabled>true</enabled>
+                                        </releases>
+                                        <snapshots>
+                                                <enabled>false</enabled>
+                                        </snapshots>
+                                </pluginRepository>
+                        </pluginRepositories>
+                </profile>
+        </profiles>
+
+        <activeProfiles>
+                <activeProfile>paypal</activeProfile>
+        </activeProfiles>
+
+        <pluginGroups>
+                <pluginGroup>org.mortbay.jetty</pluginGroup>
+                <pluginGroup>com.ebay.raptor.build</pluginGroup>
+                <pluginGroup>org.codehaus.mojo</pluginGroup>
+                <pluginGroup>org.sonatype.maven.plugins</pluginGroup>
+        </pluginGroups>
+</settings>
+
